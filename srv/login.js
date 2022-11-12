@@ -60,7 +60,6 @@ module.exports = function(app){
 			});
 		});*/
 		
-		res.send({ success: false, reason: "database not set up yet"};);
-		
+		res.send({ success: false, reason: "database not set up yet"});
 	});
 }
