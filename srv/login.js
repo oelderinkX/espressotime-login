@@ -8,7 +8,7 @@ var jsonParser = bodyParser.json();
 
 var pool = new pg.Pool(db.localPgConfig());
 
-var loginPage = fs.readFileSync(__dirname + "../webpage/login.html", "utf8");
+var loginPage = fs.readFileSync(__dirname + "/../webpage/login.html", "utf8");
 
 module.exports = function(app){
 	app.get('/', urlencodedParser, function(req, res) {
