@@ -29,18 +29,24 @@ module.exports = function(app){
 		sql += " from espresso.login";
 		sql += " where active = true and lower(shop_name) = lower($1))";
 		
+		console.log('sql: ' + sql);
+
 		//res.send({ success: false, reason: "shop or username not found"});
 
 		pool.connect(function(err, connection, done) {
 			connection.query(sql, [name], function(err, result) {
 				done();
 				
+				console.log('result: ' + result);
+				console.log('result.rowCount: ' + result.rowCount);
+
 				if (result && result.rowCount == 1) {
 					var environment = result.rows[0].db_connection;
+					console.log('environment: ' + environment);
 
 					var environment_pool = new pg.Pool(db.getEnvironmentPgConfig(environment));
 				
-					var sql = "SELECT id, shopid, name, username, permissions from espresso.user where username = $2 and password = $3";
+					var sql = "SELECT id, shopid, name, username, permissions from espresso.user where username = $1 and password = $2";
 
 					environment_pool.connect(function(err, connection, done) {
 						connection.query(sql, [name, pass], function(err, result) {
