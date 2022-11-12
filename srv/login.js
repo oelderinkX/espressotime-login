@@ -1,7 +1,7 @@
 var pg = require('pg');
 var bodyParser = require('body-parser');
 var fs = require("fs");
-var db = require('./script/db.js');
+var db = require('../script/db.js');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
