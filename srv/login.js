@@ -27,7 +27,7 @@ module.exports = function(app){
 		var sql = "select id, name, url, db_connection, type from espresso.environment";
 		sql += " where id in (select current_environment_id";
 		sql += " from espresso.login";
-		sql += " where active = true and lower(shop_name) = lower($1))";
+		sql += " where active = true and lower(shop_name) = lower(" + name + "))";
 		
 		console.log('sql: ' + sql);
 
