@@ -34,6 +34,8 @@ module.exports = function(app) {
 
 		//res.send({ success: false, reason: "shop or username not found"});
 
+		res.send({ success: false, reason: "pool connect fail!"});
+
 		pool.connect(function(err, connection, done) {
 			console.log('after pool connect');
 			res.send({ success: false, reason: "still trying to connect to db!"});
