@@ -1,9 +1,8 @@
 var url = require('url');
+var params = url.parse(process.env.DATABASE_URL);
+var auth = params.auth.split(':');
 
 function localPgConfig() {
-	var params = url.parse(process.env.DATABASE_URL);
-	var auth = params.auth.split(':');
-
 	var config = {
 		user: auth[0],
 		password: auth[1],
