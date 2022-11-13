@@ -28,6 +28,8 @@ module.exports = function(app){
 		sql += " from espresso.login";
 		sql += " where active = true and lower(shop_name) = lower($1));";
 		
+		sql = "select id, name, url, db_connection, type from espresso.environment where id in (1)";
+
 		console.log('sql: ' + sql);
 
 		//res.send({ success: false, reason: "shop or username not found"});
