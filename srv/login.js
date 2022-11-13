@@ -34,9 +34,11 @@ module.exports = function(app) {
 
 		//res.send({ success: false, reason: "shop or username not found"});
 
-		res.send({ success: false, reason: "pool connect fail!"});
+		pool.connect((err, client, release) => {
+			res.send({ success: false, reason: "success!  but not"});
+		});
 
-		pool.connect(function(err, connection, done) {
+		/*pool.connect(function(err, connection, done) {
 			console.log('after pool connect');
 			res.send({ success: false, reason: "still trying to connect to db!"});
 			/*connection.query(sql, [name], function(err, result) {
@@ -82,7 +84,7 @@ module.exports = function(app) {
 				} else {
 					res.send({ success: false, reason: "shop name or password incorrect"});
 				}
-			});*/
-		});
+			});
+		});*/
 	});
 }
