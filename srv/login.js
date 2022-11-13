@@ -10,7 +10,7 @@ var pool = new pg.Pool(db.localPgConfig());
 
 var loginPage = fs.readFileSync(__dirname + "/../webpage/login.html", "utf8");
 
-module.exports = function(app){
+module.exports = function(app) {
 	app.get('/', urlencodedParser, function(req, res) {
 		res.send(loginPage);
 	});
@@ -36,7 +36,8 @@ module.exports = function(app){
 
 		pool.connect(function(err, connection, done) {
 			console.log('after pool connect');
-			connection.query(sql, [name], function(err, result) {
+			res.send({ success: false, reason: "still trying to connect to db!"});
+			/*connection.query(sql, [name], function(err, result) {
 				console.log('beforedone');
 				done();
 				
@@ -79,7 +80,7 @@ module.exports = function(app){
 				} else {
 					res.send({ success: false, reason: "shop name or password incorrect"});
 				}
-			});
+			});*/
 		});
 	});
 }
