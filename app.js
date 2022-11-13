@@ -17,7 +17,7 @@ app.use('/webpage', express.static('webpage'));
 app.use('/javascript', express.static('javascript'));
 
 app.listen(port, function () {
-	console.log('Ready to time da staff people!');
+	console.log('Login server is ready!');
 });
 
 require('./srv/login.js')(app);
