@@ -29,20 +29,27 @@ module.exports = function(app) {
         sql += " where active = true and lower(shop_name) = lower($1))";
 
 		pool.connect(function(err, connection, done) {
-			console.log(err);
+			if (err) {
+				console.log(err);
+			}
 			connection.query(sql, [name], function(err, result) {
 				done();
 
 				if (result && result.rowCount == 1) {
 					var environment = result.rows[0].db_connection;
-					console.log('environment: ' + environment);
 
 					var environment_pool = new pg.Pool(db.getEnvironmentPgConfig(environment));
 				
 					var sql = "SELECT id, shopid, name, username, permissions from espresso.user where username = $1 and password = $2";
 
-					environment_pool.connect(function(err, connection, done) {
-						connection.query(sql, [name, pass], function(err, result) {
+					environment_pool.connect(function(err, environment_connection, done) {
+						if (err) {
+							console.log(err);
+						}
+
+						console.log(sql);
+
+						environment_connection.query(sql, [name, pass], function(err, result) {
 							done();
 
 							var login = { success: false, reason: "unknown error" };
