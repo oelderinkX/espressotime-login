@@ -11,8 +11,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="javascript/common.js"></script>
     <script>
-        var redirectPage = '!%REDIRECT_URL%!';
-
         function login() {
             var usr = document.getElementById("usr");
             var pwd = document.getElementById("pwd");
@@ -23,9 +21,6 @@
                 var login = JSON.parse(response);
 
                 if (login.success == true) {
-                    //setCookie('identifier', login.identifier);
-                    //window.location.href = 'https://' + login.redirect;
-
                     var form = document.createElement('form');
                     form.action= 'https://' + login.redirect;
                     form.method='POST';
