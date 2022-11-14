@@ -9,7 +9,7 @@ function localPgConfig() {
 		host: params.hostname,
 		port: params.port,
 		database: params.pathname.split('/')[1],
-		ssl: {rejectUnauthorized: false}	  
+		ssl: {rejectUnauthorized: false} // I WILL NEED TO FIX THIS!
 	};
 
 	return config;
@@ -27,7 +27,7 @@ function getEnvironmentPgConfig(environment) {
 		host: environment_params.hostname,
 		port: environment_params.port,
 		database: environment_params.pathname.split('/')[1],
-		ssl: true	  
+		ssl: {rejectUnauthorized: false} // I WILL NEED TO FIX THIS!
 	};
   
 	return config;
