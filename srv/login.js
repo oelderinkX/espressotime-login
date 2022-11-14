@@ -6,7 +6,7 @@ var db = require('../script/db.js');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 
-//var pool = new pg.Pool(db.localPgConfig());
+var pool = new pg.Pool(db.localPgConfig());
 
 var loginPage = fs.readFileSync(__dirname + "/../webpage/login.html", "utf8");
 
@@ -23,28 +23,14 @@ module.exports = function(app) {
 		var name = req.body.name;
 		var pass = req.body.password;
 
-		var pool = new pg.Pool({
-			"user": "ebwtxxrsytdnip",
-			"password": "63dd485d8e227b728c0e1ee5e3b1ba83b994a4f8808de60e21bb230a424dc754",
-			"host": "ec2-54-86-106-48.compute-1.amazonaws.com",
-			"port": "5432",
-			"database": "deu1umlpenf73j",
-			"ssl": true
-		});
+        var sql = "select id, name, url, db_connection, type from espresso.environment";
+        sql += " where id in (select current_environment_id";
+        sql += " from espresso.login";
+        sql += " where active = true and lower(shop_name) = lower($1))";
 
-		pool.connect((err, client, release) => {
-			res.send({ success: false, reason: "success!  but not"});
-		});
-
-		/*pool.connect(function(err, connection, done) {
-			console.log('after pool connect');
-			res.send({ success: false, reason: "still trying to connect to db!"});
-			/*connection.query(sql, [name], function(err, result) {
-				console.log('beforedone');
+		pool.connect(function(err, connection, done) {
+			connection.query(sql, [name], function(err, result) {
 				done();
-				
-				console.log('result: ' + result);
-				console.log('result.rowCount: ' + result.rowCount);
 
 				if (result && result.rowCount == 1) {
 					var environment = result.rows[0].db_connection;
@@ -83,6 +69,6 @@ module.exports = function(app) {
 					res.send({ success: false, reason: "shop name or password incorrect"});
 				}
 			});
-		});*/
+		});
 	});
 }

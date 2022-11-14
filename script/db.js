@@ -12,10 +12,6 @@ function localPgConfig() {
 		ssl: true	  
 	};
 
-	console.log('config start ***');
-	console.log(JSON.stringify(config, null, 3));
-	console.log('config end ***');
-
 	return config;
 }
 module.exports.localPgConfig = localPgConfig;
