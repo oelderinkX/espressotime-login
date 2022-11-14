@@ -23,8 +23,22 @@
                 var login = JSON.parse(response);
 
                 if (login.success == true) {
-                    setCookie('identifier', login.identifier);
-                    window.location.href = 'https://' + login.redirect;
+                    //setCookie('identifier', login.identifier);
+                    //window.location.href = 'https://' + login.redirect;
+
+                    var form = document.createElement('form');
+                    form.action= 'https://' + login.redirect;
+                    form.method='POST';
+                    form.target='_blank';
+
+                    var inputIdentifier = document.createElement('input');
+                    inputIdentifier.type = 'hidden';
+                    inputIdentifier.name = 'identifier';
+                    inputIdentifier.value = login.identifier;
+                    form.appendChild(inputIdentifier);
+
+                    document.body.appendChild(form);
+                    form.submit();
                 } else {
                     alert('Login failure: ' + login.reason);
                 }
