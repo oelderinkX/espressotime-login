@@ -18,7 +18,7 @@ module.exports.localPgConfig = localPgConfig;
 
 function getEnvironmentPgConfig(environment) {
 	var env = process.env;
-	environment_params = url.parse(env["DATABASE_URL_" + environment]);
+	environment_params = url.parse(environment]);
 	var environment_auth = environment_params.auth.split(':');
 	
 	var config = {
