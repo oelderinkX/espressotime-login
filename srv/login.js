@@ -37,6 +37,7 @@ module.exports = function(app) {
 
 				if (result && result.rowCount == 1) {
 					var environment = result.rows[0].db_connection;
+					var url = result.rows[0].url;
 
 					var environment_pool = new pg.Pool(db.getEnvironmentPgConfig(environment));
 				
@@ -47,14 +48,8 @@ module.exports = function(app) {
 							console.log(err);
 						}
 
-						console.log(sql);
-
 						environment_connection.query(sql, [name, pass], function(err, result) {
 							done();
-
-							console.log('err: ' + err);
-							console.log('result: ' + result);
-							console.log('rowCount: ' + result.rowCount);
 
 							var login = { success: false, reason: "unknown error" };
 
@@ -67,7 +62,7 @@ module.exports = function(app) {
 								encoded_identifier += ';12121976;';
 
 								var encode = Buffer.from(encoded_identifier).toString('base64');
-								login = { success: true, identifier: encode };
+								login = { success: true, identifier: encode, redirect: url };
 							} else if (result && result.rowCount > 1 ) {
 								login = { success: false, reason: "multiple users found, call administrator" };
 							} else {
