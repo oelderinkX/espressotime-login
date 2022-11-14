@@ -29,6 +29,7 @@ module.exports = function(app) {
         sql += " where active = true and lower(shop_name) = lower($1))";
 
 		pool.connect(function(err, connection, done) {
+			console.log(err);
 			connection.query(sql, [name], function(err, result) {
 				done();
 
