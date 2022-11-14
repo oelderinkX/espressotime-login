@@ -52,6 +52,9 @@ module.exports = function(app) {
 						environment_connection.query(sql, [name, pass], function(err, result) {
 							done();
 
+							console.log(result);
+							console.log(result.rowCount);
+
 							var login = { success: false, reason: "unknown error" };
 
 							if (result && result.rowCount == 1) {
