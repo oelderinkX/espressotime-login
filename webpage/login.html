@@ -24,7 +24,7 @@
 
                 if (login.success == true) {
                     setCookie('identifier', login.identifier);
-                    window.location.href = login.redirect;
+                    window.location.href = 'https://' + login.redirect;
                 } else {
                     alert('Login failure: ' + login.reason);
                 }
