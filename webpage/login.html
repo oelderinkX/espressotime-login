@@ -21,6 +21,8 @@
                 var login = JSON.parse(response);
 
                 if (login.success == true) {
+                    var url = new URL(window.location.href);
+
                     var form = document.createElement('form');
                     form.action= 'https://' + login.redirect;
                     form.method='POST';
@@ -30,6 +32,12 @@
                     inputIdentifier.name = 'identifier';
                     inputIdentifier.value = login.identifier;
                     form.appendChild(inputIdentifier);
+
+                    var inputRedirect = document.createElement('input');
+                    inputRedirect.type = 'hidden';
+                    inputRedirect.name = 'redirect';
+                    inputRedirect.value = url.searchParams.get('redirect');
+                    form.appendChild(inputRedirect);
 
                     document.body.appendChild(form);
                     form.submit();
