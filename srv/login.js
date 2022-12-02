@@ -32,7 +32,9 @@ module.exports = function(app) {
 					shopname = split[0];
 				}
 				if (split.length > 1) {
-					employeename = split[1];
+					if (split[1]) {
+						employeename = split[1].trim();
+					}
 				}
 			}
 		}
@@ -56,32 +58,56 @@ module.exports = function(app) {
 
 					var environment_pool = new pg.Pool(db.getEnvironmentPgConfig(environment));
 				
-					var sql = "SELECT id, shopid, name, username, permissions from espresso.user where username = $1 and password = $2";
-
 					environment_pool.connect(function(err, environment_connection, done) {
 						if (err) {
 							console.log(err);
 						}
 
-						environment_connection.query(sql, [shopname, pass], function(err, result) {
+						var sql = '';
+						var params = [];
+						var isEmployeeLogin = false;
+
+						if (employeename.length > 0) {
+							isEmployeeLogin = true;
+							sql = "select name, id from espresso.employee";
+							sql += " where ex = false and name = $1 and pin = $2 and";
+							sql += " shopid = (SELECT shopid from espresso.user where username = $3)";
+							params = [employeename, pass, shopname];
+						} else {
+							sql = "SELECT id, shopid, name, username, permissions from espresso.user where username = $1 and password = $2";
+							params = [shopname, pass];
+						}
+
+						environment_connection.query(sql, params, function(err, result) {
 							done();
 
 							var login = { success: false, reason: "unknown error" };
 
 							if (result && result.rowCount == 1) {
-								var encoded_identifier = result.rows[0].id;
-								encoded_identifier += ';12121976;';
-								encoded_identifier += result.rows[0].shopid;
-								encoded_identifier += ';12121976;';
-								encoded_identifier += result.rows[0].username;
-								encoded_identifier += ';12121976;';
+								var encoded_identifier = '';
+
+								if (isEmployeeLogin) {
+									encoded_identifier = result.rows[0].namne;
+									encoded_identifier += ';17122011;';
+									encoded_identifier += result.rows[0].id;
+									encoded_identifier += ';17122011;';
+									encoded_identifier += 'Hi';
+									encoded_identifier += ';17122011;';
+								} else {
+									encoded_identifier = result.rows[0].id;
+									encoded_identifier += ';12121976;';
+									encoded_identifier += result.rows[0].shopid;
+									encoded_identifier += ';12121976;';
+									encoded_identifier += result.rows[0].username;
+									encoded_identifier += ';12121976;';
+								}
 
 								var encode = Buffer.from(encoded_identifier).toString('base64');
 								login = { success: true, identifier: encode, redirect: url };
 							} else if (result && result.rowCount > 1 ) {
 								login = { success: false, reason: "multiple users found, call administrator" };
 							} else {
-								login = { success: false, reason: "shop name or password incorrect" };
+								login = { success: false, reason: "shop name, employee name or password incorrect" };
 							}
 								
 							res.send(login);
