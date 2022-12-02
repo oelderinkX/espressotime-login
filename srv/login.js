@@ -21,6 +21,21 @@ module.exports = function(app) {
 
 	app.post('/login', jsonParser, function(req, res) {
 		var name = req.body.name;
+		var shopname = '';
+		var employeename = '';
+
+		if (name) {
+			var split = name.split(',');
+
+			if (split) {
+				if (split.length > 0) {
+					shopname = split[0];
+				}
+				if (split.length > 1) {
+					employeename = split[1];
+				}
+			}
+		}
 		var pass = req.body.password;
 
         var sql = "select id, name, url, db_connection, type from espresso.environment";
@@ -32,7 +47,7 @@ module.exports = function(app) {
 			if (err) {
 				console.log(err);
 			}
-			connection.query(sql, [name], function(err, result) {
+			connection.query(sql, [shopname], function(err, result) {
 				done();
 
 				if (result && result.rowCount == 1) {
@@ -48,7 +63,7 @@ module.exports = function(app) {
 							console.log(err);
 						}
 
-						environment_connection.query(sql, [name, pass], function(err, result) {
+						environment_connection.query(sql, [shopname, pass], function(err, result) {
 							done();
 
 							var login = { success: false, reason: "unknown error" };
