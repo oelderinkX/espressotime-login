@@ -94,7 +94,7 @@ module.exports = function(app) {
 									encoded_identifier += 'Hi';
 									encoded_identifier += ';17122011;';
 
-									url = 'employee';
+									url += 'employee';
 								} else {
 									encoded_identifier = result.rows[0].id;
 									encoded_identifier += ';12121976;';
