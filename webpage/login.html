@@ -11,10 +11,10 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="javascript/common.js"></script>
     <script>
-        function login(isEmployeeLogin) {
+        function login(isDeviceLogin) {
             var json = { };
 
-            if (isEmployeeLogin) {
+            if (isDeviceLogin) {
                 var usr1= document.getElementById("usr1");
                 var pwd1 = document.getElementById("pwd1");
                 var json = { shop: usr1.value, password: pwd1.value };
@@ -65,6 +65,9 @@
             var device_login = document.getElementById("device_login");
             var employee_login = document.getElementById("employee_login");
 
+            var submitButton = document.getElementById("submitButton");
+            submitButton.setAttribute('onclick', 'login(true);');
+
             device_login.style = "display: inline;";
             employee_login.style = "display: none;";           
 
@@ -92,6 +95,9 @@
 
             var device_login = document.getElementById("device_login");
             var employee_login = document.getElementById("employee_login");
+
+            var submitButton = document.getElementById("submitButton");
+            submitButton.setAttribute('onclick', 'login(false);');
 
             device_login.style = "display: none;";
             employee_login.style = "display: inline;";           
@@ -140,37 +146,39 @@
                     </tr>
                     <tr style="border-bottom: 1pt solid black; border-left: 1pt solid black; border-right: 1pt solid black;">
                         <td colspan="3" style="padding: 5px;">
-                            <div id="device_login" style="display: none">
-                                <br/>
-                                <div class="form-group">
-                                    <div class="input-group-lg">
-                                        <label for="usr1">Shop Name:</label>
-                                        <input type="text" class="form-control" id="usr1">
-                                        <br/>
-                                        <label for="pwd1">Password:</label>
-                                        <input type="password" class="form-control" id="pwd1">
-                                        <br/>
-                                        <button type="submit" class="btn btn-success btn-lg" onclick="login(true);">Login</button>
-                                    </div>
-                                </div>           
-                            </div>
-                            <div id="employee_login" style="display: none">
-                                <br/>
-                                <div class="form-group">
-                                    <div class="input-group-lg">
-                                        <label for="usr2">Shop Name:</label>
-                                        <input type="text" class="form-control" id="usr2">
-                                        <br/>
-                                        <label for="empl2">Employee Name:</label>
-                                        <input type="text" class="form-control" id="empl2">
-                                        <br/>
-                                        <label for="pwd2">Password:</label>
-                                        <input type="password" class="form-control" id="pwd2">
-                                        <br/>
-                                        <button type="submit" class="btn btn-success btn-lg" onclick="login(false);">Login</button>
-                                    </div>
-                                </div>           
-                            </div>
+                            <form>
+                                <div id="device_login" style="display: none">
+                                    <br/>
+                                    <div class="form-group">
+                                        <div class="input-group-lg">
+                                            <label for="usr1">Shop Name:</label>
+                                            <input type="text" class="form-control" id="usr1">
+                                            <br/>
+                                            <label for="pwd1">Password:</label>
+                                            <input type="password" class="form-control" id="pwd1">
+                                            <br/>
+                                        </div>
+                                    </div>           
+                                </div>
+                                <div id="employee_login" style="display: none">
+                                    <br/>
+                                    <div class="form-group">
+                                        <div class="input-group-lg">
+                                            <label for="usr2">Shop Name:</label>
+                                            <input type="text" class="form-control" id="usr2">
+                                            <br/>
+                                            <label for="empl2">Employee Name:</label>
+                                            <input type="text" class="form-control" id="empl2">
+                                            <br/>
+                                            <label for="pwd2">Password:</label>
+                                            <input type="password" class="form-control" id="pwd2">
+                                            <br/>
+                                        </div>
+                                    </div>           
+                                </div>
+
+                                <button id="submitButton" type="submit" class="btn btn-success btn-lg" onclick="login(false);">Login</button>
+                            </form>
                         </td>
                     </tr>
                 </table>           
