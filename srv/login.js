@@ -20,26 +20,10 @@ module.exports = function(app) {
 	});
 
 	app.post('/login', jsonParser, function(req, res) {
-		var name = req.body.name;
-		var shopname = '';
-		var employeename = '';
-
-		if (name) {
-			var split = name.split(',');
-
-			if (split) {
-				if (split.length > 0) {
-					shopname = split[0];
-				}
-				if (split.length > 1) {
-					if (split[1]) {
-						employeename = split[1].trim();
-					}
-				}
-			}
-		}
+		var shop = req.body.shop;
+		var employee = req.body.employee;
 		var pass = req.body.password;
-
+	
         var sql = "select id, name, url, db_connection, type from espresso.environment";
         sql += " where id in (select current_environment_id";
         sql += " from espresso.login";
@@ -49,7 +33,7 @@ module.exports = function(app) {
 			if (err) {
 				console.log(err);
 			}
-			connection.query(sql, [shopname], function(err, result) {
+			connection.query(sql, [shop], function(err, result) {
 				done();
 
 				if (result && result.rowCount == 1) {
@@ -65,17 +49,16 @@ module.exports = function(app) {
 
 						var sql = '';
 						var params = [];
-						var isEmployeeLogin = false;
+						var isEmployeeLogin = employee && employee.length > 0;
 
-						if (employeename.length > 0) {
-							isEmployeeLogin = true;
+						if (isEmployeeLogin) {
 							sql = "select name, id from espresso.employee";
 							sql += " where ex = false and name = $1 and pin = $2 and";
 							sql += " shopid = (SELECT shopid from espresso.user where username = $3)";
-							params = [employeename, pass, shopname];
+							params = [employee, pass, shop];
 						} else {
 							sql = "SELECT id, shopid, name, username, permissions from espresso.user where username = $1 and password = $2";
-							params = [shopname, pass];
+							params = [shop, pass];
 						}
 
 						environment_connection.query(sql, params, function(err, result) {
@@ -115,7 +98,7 @@ module.exports = function(app) {
 						});
 					});
 				} else {
-					res.send({ success: false, reason: "shop name or password incorrect"});
+					res.send({ success: false, reason: "shop, employee or password incorrect"});
 				}
 			});
 		});
