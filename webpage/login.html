@@ -68,10 +68,19 @@
             device_login.style = "display: inline;";
             employee_login.style = "display: none;";           
 
-            deviceLoginTab.style = "border-top: 1pt solid black; border-left: 1pt solid black; border-right: 1pt solid black; border-bottom: 0pt solid black; padding: 5px;";
+            var tab1Border = "border: none; ";
+            tab1Border += "border-top: 1pt solid black;  ";
+            tab1Border += "border-left: 1pt solid black; ";
+            tab1Border += "border-right: 1pt solid black; ";
+            tab1Border += "padding: 5px;";
+            deviceLoginTab.style = tab1Border;
             deviceLoginButton.classList = "btn btn-primary btn-block";
 
-            employeeLoginTab.style = "border-top: 0pt solid black; border-left: 0pt solid black; border-right: 0pt solid black; border-bottom: 1pt solid black; padding: 5px;";
+            var tab2Border = "border: none; ";
+            tab2Border += "border-left: 1pt solid black; ";
+            tab2Border += "border-bottom: 1pt solid black; ";
+            tab2Border += "padding: 5px;";
+            employeeLoginTab.style = tab2Border;
             employeeLoginButton.classList = "btn btn-secondary btn-block";
         }
 
@@ -88,11 +97,20 @@
             device_login.style = "display: none;";
             employee_login.style = "display: inline;";           
 
-            deviceLoginTab.style = "border-top: 0pt solid black; border-left: 0pt solid black; border-right: 0pt solid black; border-bottom: 1pt solid black; padding: 5px;";
-            deviceLoginButton.classList = "btn btn-secondary btn-block";
+            var tab1Border = "border: none; ";
+            tab1Border += "border-left: 1pt solid black; ";
+            tab1Border += "border-bottom: 1pt solid black; ";
+            tab1Border += "padding: 5px;";
+            deviceLoginTab.style = tab1Border;
+            deviceLoginButton.classList = "btn btn-primary btn-block";
 
-            employeeLoginTab.style = "border-top: 1pt solid black; border-left: 1pt solid black; border-right: 1pt solid black; border-bottom: 0pt solid black; padding: 5px;";
-            employeeLoginButton.classList = "btn btn-primary btn-block";
+            var tab2Border = "border: none; ";
+            tab2Border += "border-top: 1pt solid black; ";
+            tab2Border += "border-left: 1pt solid black; ";
+            tab2Border += "border-right: 1pt solid black; ";
+            tab2Border += "padding: 5px;";
+            employeeLoginTab.style = tab2Border;
+            employeeLoginButton.classList = "btn btn-secondary btn-block";
         }
     </script>
     <style>
