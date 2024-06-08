@@ -52,9 +52,9 @@ module.exports = function(app) {
 						var isEmployeeLogin = employee && employee.length > 0;
 
 						if (isEmployeeLogin) {
-							sql = "select name, id from espresso.employee";
-							sql += " where ex = false and name = $1 and pin = $2 and";
-							sql += " shopid = (SELECT shopid from espresso.user where username = $3)";
+							sql = "select name, id, job_title from espresso.employee";
+							sql += " where ex = false and lower(name) = lower($1) and pin = $2 and";
+							sql += " shopid = (SELECT shopid from espresso.user where lower(username) = lower($3))";
 							params = [employee, pass, shop];
 						} else {
 							sql = "SELECT id, shopid, name, username, permissions from espresso.user where username = $1 and password = $2";
@@ -76,6 +76,9 @@ module.exports = function(app) {
 									encoded_identifier += ';17122011;';
 									encoded_identifier += 'Hi';
 									encoded_identifier += ';17122011;';
+									encoded_identifier += '{ "job_title_id": ' + result.rows[0].job_title + ' }';
+									encoded_identifier += ';17122011;';
+
 									url += "/employee"
 								} else {
 									encoded_identifier = result.rows[0].id;
