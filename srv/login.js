@@ -79,7 +79,7 @@ module.exports = function(app) {
 									encoded_identifier += '{ "job_title_id": ' + result.rows[0].job_title + ' }';
 									encoded_identifier += ';17122011;';
 
-									url += "/employee"
+									url += "/employee";
 								} else {
 									encoded_identifier = result.rows[0].id;
 									encoded_identifier += ';12121976;';
@@ -87,6 +87,8 @@ module.exports = function(app) {
 									encoded_identifier += ';12121976;';
 									encoded_identifier += result.rows[0].username;
 									encoded_identifier += ';12121976;';
+
+									url += "/device";
 								}
 
 								var encode = Buffer.from(encoded_identifier).toString('base64');
