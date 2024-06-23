@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Espresso Time - Login</title>
+    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -11,18 +11,25 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="javascript/common.js"></script>
     <script>
-        function login(isDeviceLogin) {
+        function login() {
             var json = { };
 
-            if (isDeviceLogin) {
-                var usr1= document.getElementById("usr1");
-                var pwd1 = document.getElementById("pwd1");
-                var json = { shop: usr1.value, password: pwd1.value };
-            } else {
-                var usr2= document.getElementById("usr2");
+            loginType = document.getElementById("loginType").value;
+
+            if (loginType == 1) {
+                var usr2 = document.getElementById("usr2");
                 var empl2 = document.getElementById("empl2");
                 var pwd2 = document.getElementById("pwd2");
-                var json = { shop: usr2.value, employee: empl2.value, password: pwd2.value };
+                var json = { shop: usr2.value, employee: empl2.value, password: pwd2.value, loginType: loginType };
+            } else if (loginType == 2) {
+                var usr3 = document.getElementById("usr3");
+                var empl3 = document.getElementById("empl3");
+                var pwd3 = document.getElementById("pwd3");
+                var json = { shop: usr3.value, employee: empl3.value, password: pwd3.value, loginType: loginType };
+            } else {
+                var usr1 = document.getElementById("usr1");
+                var pwd1 = document.getElementById("pwd1");
+                var json = { shop: usr1.value, password: pwd1.value, loginType: loginType };
             }
 
             sendPost("/login", JSON.stringify(json), function(response) {
@@ -62,14 +69,22 @@
             var employeeLoginTab = document.getElementById("employeeLoginTab");
             var employeeLoginButton = document.getElementById("employeeLoginButton");
 
+            var bohLoginTab = document.getElementById("bohLoginTab");
+            var bohLoginButton = document.getElementById("bohLoginButton");
+
             var device_login = document.getElementById("device_login");
             var employee_login = document.getElementById("employee_login");
+            var boh_login = document.getElementById("boh_login");
 
             var submitButton = document.getElementById("submitButton");
-            submitButton.setAttribute('onclick', 'login(true);');
+            submitButton.setAttribute('onclick', 'login();');
+
+            var loginType = document.getElementById("loginType");
+            loginType.value = 0;
 
             device_login.style = "display: inline;";
-            employee_login.style = "display: none;";           
+            employee_login.style = "display: none;";
+            boh_login.style = "display: none;";
 
             var tab1Border = "border: none; ";
             tab1Border += "border-top: 1pt solid black;  ";
@@ -83,7 +98,13 @@
             tab2Border += "border-bottom: 1pt solid black; ";
             tab2Border += "padding: 5px;";
             employeeLoginTab.style = tab2Border;
-            employeeLoginButton.classList = "btn btn-secondary btn-block";
+            employeeLoginButton.classList = "btn btn-warning btn-block";
+
+            var tab3Border = "border: none; ";
+            tab3Border += "border-bottom: 1pt solid black; ";
+            tab3Border += "padding: 5px;";
+            bohLoginTab.style = tab3Border;
+            bohLoginButton.classList = "btn btn-secondary btn-block";
         }
 
         function showEmployeeLogin() {
@@ -93,14 +114,22 @@
             var employeeLoginTab = document.getElementById("employeeLoginTab");
             var employeeLoginButton = document.getElementById("employeeLoginButton");
 
+            var bohLoginTab = document.getElementById("bohLoginTab");
+            var bohLoginButton = document.getElementById("bohLoginButton");
+
             var device_login = document.getElementById("device_login");
             var employee_login = document.getElementById("employee_login");
+            var boh_login = document.getElementById("boh_login");
 
             var submitButton = document.getElementById("submitButton");
-            submitButton.setAttribute('onclick', 'login(false);');
+            submitButton.setAttribute('onclick', 'login();');
+
+            var loginType = document.getElementById("loginType");
+            loginType.value = 1;
 
             device_login.style = "display: none;";
-            employee_login.style = "display: inline;";           
+            employee_login.style = "display: inline;";
+            boh_login.style = "display: none;";   
 
             var tab1Border = "border: none; ";
             tab1Border += "border-bottom: 1pt solid black; ";
@@ -114,7 +143,58 @@
             tab2Border += "border-right: 1pt solid black; ";
             tab2Border += "padding: 5px;";
             employeeLoginTab.style = tab2Border;
-            employeeLoginButton.classList = "btn btn-secondary btn-block";
+            employeeLoginButton.classList = "btn btn-warning btn-block";
+
+            var tab3Border = "border: none; ";
+            tab3Border += "border-bottom: 1pt solid black; ";
+            tab3Border += "padding: 5px;";
+            bohLoginTab.style = tab3Border;
+            bohLoginButton.classList = "btn btn-secondary btn-block";
+        }
+
+        function showBOHLogin() {
+            var deviceLoginTab = document.getElementById("deviceLoginTab");
+            var deviceLoginButton = document.getElementById("deviceLoginButton");
+
+            var employeeLoginTab = document.getElementById("employeeLoginTab");
+            var employeeLoginButton = document.getElementById("employeeLoginButton");
+
+            var bohLoginTab = document.getElementById("bohLoginTab");
+            var bohLoginButton = document.getElementById("bohLoginButton");
+
+            var device_login = document.getElementById("device_login");
+            var employee_login = document.getElementById("employee_login");
+            var boh_login = document.getElementById("boh_login");
+
+            var submitButton = document.getElementById("submitButton");
+            submitButton.setAttribute('onclick', 'login();');
+
+            var loginType = document.getElementById("loginType");
+            loginType.value = 2;
+
+            device_login.style = "display: none;";
+            employee_login.style = "display: none;";           
+            boh_login.style = "display: inline;";   
+
+            var tab1Border = "border: none; ";
+            tab1Border += "border-bottom: 1pt solid black; ";
+            tab1Border += "padding: 5px;";
+            deviceLoginTab.style = tab1Border;
+            deviceLoginButton.classList = "btn btn-primary btn-block";
+
+            var tab2Border = "border: none; ";
+            tab2Border += "border-bottom: 1pt solid black; ";
+            tab2Border += "padding: 5px;";
+            employeeLoginTab.style = tab2Border;
+            employeeLoginButton.classList = "btn btn-warning btn-block";
+
+            var tab3Border = "border: none; ";
+            tab3Border += "border-top: 1pt solid black; ";
+            tab3Border += "border-left: 1pt solid black; ";
+            tab3Border += "border-right: 1pt solid black; ";
+            tab3Border += "padding: 5px;";
+            bohLoginTab.style = tab3Border;
+            bohLoginButton.classList = "btn btn-secondary btn-block";
         }
     </script>
     <style>
@@ -141,12 +221,16 @@
                         <th id="employeeLoginTab">
                             <button id="employeeLoginButton" type="button" onclick="showEmployeeLogin();">Employee Login</button>
                         </th>
+                        <th id="bohLoginTab">
+                            <button id="bohLoginButton" type="button" onclick="showBOHLogin();">BOH Login</button>
+                        </th>
                         <th style="border-bottom: 1pt solid black; padding: 5px;">
                         </th>
                     </tr>
                     <tr style="border-bottom: 1pt solid black; border-left: 1pt solid black; border-right: 1pt solid black;">
-                        <td colspan="3" style="padding: 5px;">
+                        <td colspan="4" style="padding: 5px;">
                             <form action="javascript:void(0);">
+                                <input type="hidden" id="loginType" value="0">
                                 <div id="device_login" style="display: none">
                                     <br/>
                                     <div class="form-group">
@@ -176,7 +260,22 @@
                                         </div>
                                     </div>           
                                 </div>
-
+                                <div id="boh_login" style="display: none">
+                                    <br/>
+                                    <div class="form-group">
+                                        <div class="input-group-lg">
+                                            <label for="usr3">Shop Name:</label>
+                                            <input type="text" class="form-control" id="usr3">
+                                            <br/>
+                                            <label for="empl3">Manager Name:</label>
+                                            <input type="text" class="form-control" id="empl3">
+                                            <br/>
+                                            <label for="pwd3">Password:</label>
+                                            <input type="password" class="form-control" id="pwd3">
+                                            <br/>
+                                        </div>
+                                    </div>           
+                                </div>
                                 <button id="submitButton" type="submit" class="btn btn-success btn-lg" onclick="login(false);">Login</button>
                             </form>
                         </td>

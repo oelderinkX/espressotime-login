@@ -23,6 +23,7 @@ module.exports = function(app) {
 		var shop = req.body.shop;
 		var employee = req.body.employee;
 		var pass = req.body.password;
+		var loginType = req.body.loginType;
 	
         var sql = "select id, name, url, db_connection, type from espresso.environment";
         sql += " where id in (select current_environment_id";
@@ -51,9 +52,15 @@ module.exports = function(app) {
 						var params = [];
 						var isEmployeeLogin = employee && employee.length > 0;
 
-						if (isEmployeeLogin) {
+						if (loginType == 1) {
 							sql = "select name, id, job_title from espresso.employee";
 							sql += " where ex = false and lower(name) = lower($1) and pin = $2 and";
+							sql += " shopid = (SELECT shopid from espresso.user where lower(username) = lower($3))";
+							params = [employee, pass, shop];
+						} else if (loginType == 2) {
+							sql = "select name, id, shopid from espresso.employee";
+							sql += " where ex = false and lower(name) = lower($1) and pin = $2 and";
+							sql += " job_title = 9 and";
 							sql += " shopid = (SELECT shopid from espresso.user where lower(username) = lower($3))";
 							params = [employee, pass, shop];
 						} else {
@@ -69,8 +76,8 @@ module.exports = function(app) {
 							if (result && result.rowCount == 1) {
 								var encoded_identifier = '';
 
-								if (isEmployeeLogin) {
-									encoded_identifier = result.rows[0].namne;
+								if (loginType == 1) {
+									encoded_identifier = result.rows[0].name;
 									encoded_identifier += ';17122011;';
 									encoded_identifier += result.rows[0].id;
 									encoded_identifier += ';17122011;';
@@ -80,6 +87,17 @@ module.exports = function(app) {
 									encoded_identifier += ';17122011;';
 
 									url += "/employee";
+								} else if (loginType == 2) {
+									encoded_identifier = result.rows[0].id;
+									encoded_identifier += ';12121976;';
+									encoded_identifier += result.rows[0].shopid;
+									encoded_identifier += ';12121976;';
+									encoded_identifier += 'Hi';
+									encoded_identifier += ';12121976;';
+									encoded_identifier += result.rows[0].name;
+									encoded_identifier += ';12121976;';
+
+									url += "/admin";
 								} else {
 									encoded_identifier = result.rows[0].id;
 									encoded_identifier += ';12121976;';
