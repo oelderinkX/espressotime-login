@@ -20,16 +20,16 @@
                 var usr2 = document.getElementById("usr2");
                 var empl2 = document.getElementById("empl2");
                 var pwd2 = document.getElementById("pwd2");
-                var json = { shop: usr2.value, employee: empl2.value, password: pwd2.value, loginType: loginType };
+                var json = { shop: usr2.value.trim(), employee: empl2.value.trim(), password: pwd2.value.trim(), loginType: loginType };
             } else if (loginType == 2) {
                 var usr3 = document.getElementById("usr3");
                 var empl3 = document.getElementById("empl3");
                 var pwd3 = document.getElementById("pwd3");
-                var json = { shop: usr3.value, employee: empl3.value, password: pwd3.value, loginType: loginType };
+                var json = { shop: usr3.value.trim(), employee: empl3.value.trim(), password: pwd3.value.trim(), loginType: loginType };
             } else {
                 var usr1 = document.getElementById("usr1");
                 var pwd1 = document.getElementById("pwd1");
-                var json = { shop: usr1.value, password: pwd1.value, loginType: loginType };
+                var json = { shop: usr1.value.trim(), password: pwd1.value.trim(), loginType: loginType };
             }
 
             sendPost("/login", JSON.stringify(json), function(response) {
