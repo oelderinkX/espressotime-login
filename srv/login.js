@@ -60,7 +60,7 @@ module.exports = function(app) {
 						} else if (loginType == 2) {
 							sql = "select name, id, shopid from espresso.employee";
 							sql += " where ex = false and lower(name) = lower($1) and pin = $2 and";
-							sql += " job_title = 9 and";
+							sql += " job_title = (select id from espresso.role where shopid = (SELECT shopid from espresso.user where lower(username) = lower($3)) and name ilike '%manager%') and";
 							sql += " shopid = (SELECT shopid from espresso.user where lower(username) = lower($3))";
 							params = [employee, pass, shop];
 						} else {
