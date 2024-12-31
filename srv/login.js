@@ -53,9 +53,10 @@ module.exports = function(app) {
 						var isEmployeeLogin = employee && employee.length > 0;
 
 						if (loginType == 1) {
-							sql = "select name, id, job_title from espresso.employee";
-							sql += " where ex = false and lower(name) = lower($1) and pin = $2 and";
-							sql += " shopid = (SELECT shopid from espresso.user where lower(username) = lower($3))";
+							sql = "select e.name, e.id, e.job_title, r.name as rolename from espresso.employee as e";
+							sql += " INNER JOIN espresso.role as r ON r.id = e.job_title";
+							sql += " where e.ex = false and lower(e.name) = lower($1) and e.pin = $2 and";
+							sql += " e.shopid = (SELECT shopid from espresso.user where lower(username) = lower($3))";
 							params = [employee, pass, shop];
 						} else if (loginType == 2) {
 							sql = "select name, id, shopid from espresso.employee";
@@ -83,7 +84,7 @@ module.exports = function(app) {
 									encoded_identifier += ';17122011;';
 									encoded_identifier += 'Hi';
 									encoded_identifier += ';17122011;';
-									encoded_identifier += '{ "job_title_id": ' + result.rows[0].job_title + ' }';
+									encoded_identifier += '{ "job_title_id": ' + result.rows[0].job_title + ', "role": "' + result.rows[0].rolename +  '" }';
 									encoded_identifier += ';17122011;';
 
 									url += "/employee";
