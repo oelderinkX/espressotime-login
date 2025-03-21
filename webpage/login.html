@@ -24,6 +24,9 @@
             }
 
             html[0].style.fontSize = fontPercent + '%'
+
+            let info = document.getElementById('info');
+            info.innerText = html[0].clientWidth + ' x ' + html[0].clientHeight;
         }
 
         function login() {
@@ -239,7 +242,8 @@
                 </tr>
             </table>
             <button id="submitButton" type="submit" class="btn btn-success btn-lg" onclick="">Login</button>    
-        </div>      
+        </div>
+        <div id="info"></div>
     </body>
 <script>
     resizeHtml();
