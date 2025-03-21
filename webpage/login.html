@@ -13,6 +13,19 @@
 
     <link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
     <script>
+        function resizeHtml() {
+            let html = document.getElementsByTagName('html');
+            let body = document.getElementsByTagName('body');
+            let width = body[0].clientWidth;
+            let fontPercent = 100;
+
+            if (width <= 1024) {
+                fontPercent = 150;
+            }
+
+            html[0].style.fontSize = fontPercent + '%'
+        }
+
         function login() {
             var json = { };
 
@@ -137,19 +150,19 @@
         }
     </script>
     <style>
+        html {
+            font-size: 100%;
+            font-size: 62.5%;
+        }
+
         body {
-          background-color: #ac9175;
-          color: #1f1f1f !important;
-          font-family: 'Playfair Display';
-          font-size: 3vw
+            background-color: #ac9175;
+            color: #1f1f1f !important;
+            font-family: 'Playfair Display';
         }
 
         a {
             color: #1f1f1f !important;
-        }
-
-        h1 {
-            font-size: 5vw
         }
 
         .center {
@@ -229,6 +242,7 @@
         </div>      
     </body>
 <script>
+    resizeHtml();
     showEmployeeLogin();
 </script>
 </html>
