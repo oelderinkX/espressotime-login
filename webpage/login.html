@@ -20,7 +20,9 @@
             let fontPercent = 100;
 
             if (width <= 400) {
-                fontPercent = 50;
+                fontPercent = 60;
+                maintable = document.getElementById('maintable');
+                maintable.style.height = 220;
             }
 
             html[0].style.fontSize = fontPercent + '%'
@@ -182,7 +184,7 @@
     <body>
 
         <div class="center">
-            <table border="0" style="width:100%; height:400px">
+            <table id="maintable" border="0" style="width:100%; height:440px">
                 <tr style="vertical-align: top;">
                     <th id="employeeheading"><h1><a href="#" onclick="showEmployeeLogin();">Employee</a></h1></th>
                     <th id="bohheading"><h1><a href="#" onclick="showBOHLogin();">BOH</a></h1></th>
