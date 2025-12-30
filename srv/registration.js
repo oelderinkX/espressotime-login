@@ -17,6 +17,9 @@ module.exports = function(app) {
 	});
 
 	app.post('/registration', jsonParser, async function(req, res) {
+
+		console.log(JSON.stringify(req, null, 4));
+
 		const group = req.body.group;
 		const shopname = req.body.shopname;
 		const shopphone = req.body.shopphone;
