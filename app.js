@@ -21,4 +21,5 @@ app.listen(port, function () {
 });
 
 require('./srv/login.js')(app);
+require('./srv/registration.js')(app);
 
