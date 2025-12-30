@@ -25,18 +25,18 @@
         }
 
         function setRandomRoleColors() {
-            const rc1 = document.getElementById('rolecolor1');
-            const rtc1 = document.getElementById('roletextcolor1');
+            const rc1 = document.getElementsByName('rolecolor1');
+            const rtc1 = document.getElementsByName('roletextcolor1');
             rc1.value = getRandomColor();
             rtc1.value = getRandomColor();
 
-            const rc3 = document.getElementById('rolecolor3');
-            const rtc3 = document.getElementById('roletextcolor3');
+            const rc3 = document.getElementsByName('rolecolor3');
+            const rtc3 = document.getElementsByName('roletextcolor3');
             rc3.value = getRandomColor();
             rtc3.value = getRandomColor();
 
-            const rc4 = document.getElementById('rolecolor4');
-            const rtc4 = document.getElementById('roletextcolor4');
+            const rc4 = document.getElementsByName('rolecolor4');
+            const rtc4 = document.getElementsByName('roletextcolor4');
             rc4.value = getRandomColor();
             rtc4.value = getRandomColor();
         }
@@ -69,28 +69,28 @@
         <div><form action="/registration" method="post" target="registrationresult">
             <table style="width:100%">
                 <tr>
-                    <td class="heading">Group:</td><td><input type="text" id="group" value="nz1" readonly disabled></td>
+                    <td class="heading">Group:</td><td><input type="text" name="group" value="nz1" readonly disabled></td>
                 </tr>
                 <tr>
                     <td> </td><td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>Shop name:</td><td><input type="text" size=40 id="shopname"></td>
+                    <td>Shop name:</td><td><input type="text" size=40 name="shopname"></td>
                 </tr>
                 <tr>
-                    <td>Shop phone: </td><td><input type="tel" size=40 id="shopphone"></td>
+                    <td>Shop phone: </td><td><input type="tel" size=40 name="shopphone"></td>
                 </tr>
                 <tr>
-                    <td>Shop address: </td><td><textarea rows="5" cols="40" id="shopaddress"></textarea></td>
+                    <td>Shop address: </td><td><textarea rows="5" cols="40" name="shopaddress"></textarea></td>
                 </tr>
                 <tr>
-                    <td>Shop email: </td><td><input type="email" size=40 id="shopemail"></td>
+                    <td>Shop email: </td><td><input type="email" size=40 name="shopemail"></td>
                 </tr>
                 <tr>
                     <td> </td><td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>Device password: </td><td><input type="text" size=40 id="devicepassword"></td>
+                    <td>Device password: </td><td><input type="text" size=40 name="devicepassword"></td>
                 </tr>
             </table>
             <br/>
@@ -106,28 +106,28 @@
                                 <th>Is a Job / Role</th>
                             </tr>
                             <tr>
-                                <td><input type="text" id="rolename1" value="Manager" readonly disabled></td>
-                                <td><input type="color" id="rolecolor1"></td>
-                                <td><input type="color" id="roletextcolor1"></td>
-                                <td><input type="checkbox" id="roleisjob1" checked readonly disabled></td>
+                                <td><input type="text" name="rolename1" value="Manager" readonly disabled></td>
+                                <td><input type="color" name="rolecolor1"></td>
+                                <td><input type="color" name="roletextcolor1"></td>
+                                <td><input type="checkbox" name="roleisjob1" checked readonly disabled></td>
                             </tr>
                             <tr>
-                                <td><input type="text" id="rolename2" value="Timeoff / Unavailable" readonly disabled></td>
-                                <td><input type="color" id="rolecolor2" value="#000000" readonly disabled></td>
-                                <td><input type="color" id="roletextcolor2" value="#FFFFFF" readonly disabled></td>
-                                <td><input type="checkbox" id="roleisjob2" readonly disabled></td>
+                                <td><input type="text" name="rolename2" value="Timeoff / Unavailable" readonly disabled></td>
+                                <td><input type="color" name="rolecolor2" value="#000000" readonly disabled></td>
+                                <td><input type="color" name="roletextcolor2" value="#FFFFFF" readonly disabled></td>
+                                <td><input type="checkbox" name="roleisjob2" readonly disabled></td>
                             </tr>
                             <tr>
-                                <td><input type="text" id="rolename3" value="FOH"></td>
-                                <td><input type="color" id="rolecolor3" value="red"></td>
-                                <td><input type="color" id="roletextcolor3"></td>
-                                <td><input type="checkbox" id="roleisjob3" checked></td>
+                                <td><input type="text" name="rolename3" value="FOH"></td>
+                                <td><input type="color" name="rolecolor3" value="red"></td>
+                                <td><input type="color" name="roletextcolor3"></td>
+                                <td><input type="checkbox" name="roleisjob3" checked></td>
                             </tr>
                             <tr>
-                                <td><input type="text" id="rolename4" value="Kitchen"></td>
-                                <td><input type="color" id="rolecolor4"></td>
-                                <td><input type="color" id="roletextcolor4"></td>
-                                <td><input type="checkbox" id="roleisjob4" checked></td>
+                                <td><input type="text" name="rolename4" value="Kitchen"></td>
+                                <td><input type="color" name="rolecolor4"></td>
+                                <td><input type="color" name="roletextcolor4"></td>
+                                <td><input type="checkbox" name="roleisjob4" checked></td>
                             </tr>
                             <tr>
                                 <td colspan="4">
@@ -153,13 +153,13 @@
                                 <th>Job</th>
                             </tr>
                             <tr>
-                                <td><input type="text" id="employeename1" placeholder="Owners/Managers name"></td>
-                                <td><input type="text" id="employeephone1"></td>
-                                <td><input type="text" id="employeeemail1"></td>
-                                <td><input type="text" id="employeepin1"></td>
-                                <td><input type="date" id="employeestartdate1"></td>
+                                <td><input type="text" name="employeename1" placeholder="Owners/Managers name"></td>
+                                <td><input type="text" name="employeephone1"></td>
+                                <td><input type="text" name="employeeemail1"></td>
+                                <td><input type="text" name="employeepin1"></td>
+                                <td><input type="date" name="employeestartdate1"></td>
                                 <td>
-                                    <select id="employeejob1" disabled>
+                                    <select name="employeejob1" disabled>
                                         <option value="Manager" selected>Manager</option>
                                         <option value="Manager">FOH</option>
                                         <option value="Manager">Kitchen</option>
@@ -167,13 +167,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="text" id="employeename2"></td>
-                                <td><input type="text" id="employeephone2"></td>
-                                <td><input type="text" id="employeeemail2"></td>
-                                <td><input type="text" id="employeepin2"></td>
-                                <td><input type="date" id="employeestartdate2"></td>
+                                <td><input type="text" name="employeename2"></td>
+                                <td><input type="text" name="employeephone2"></td>
+                                <td><input type="text" name="employeeemail2"></td>
+                                <td><input type="text" name="employeepin2"></td>
+                                <td><input type="date" name="employeestartdate2"></td>
                                 <td>
-                                    <select id="employeejob2">
+                                    <select name="employeejob2">
                                         <option value="" select>--- Select Job ---</option>
                                         <option value="Manager">Manager</option>
                                         <option value="Manager">FOH</option>
@@ -182,13 +182,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="text" id="employeename3"></td>
-                                <td><input type="text" id="employeephone3"></td>
-                                <td><input type="text" id="employeeemail3"></td>
-                                <td><input type="text" id="employeepin3"></td>
-                                <td><input type="date" id="employeestartdate3"></td>
+                                <td><input type="text" name="employeename3"></td>
+                                <td><input type="text" name="employeephone3"></td>
+                                <td><input type="text" name="employeeemail3"></td>
+                                <td><input type="text" name="employeepin3"></td>
+                                <td><input type="date" name="employeestartdate3"></td>
                                 <td>
-                                    <select id="employeejob3">
+                                    <select name="employeejob3">
                                         <option value="" select>--- Select Job ---</option>
                                         <option value="Manager">Manager</option>
                                         <option value="Manager">FOH</option>
