@@ -16,7 +16,7 @@ module.exports = function(app) {
 		res.send(registrationPage);
 	});
 
-	app.post('/registration', jsonParser, async function(req, res) {
+	app.post('/registration', urlencodedParser, async function(req, res) {
 
 		console.log(req.body);
 		console.log('');
