@@ -67,11 +67,10 @@ module.exports = function(app) {
 	
         const sql = "select id, name, url, type, db_connection from espresso.environment where name = $1 order by type asc";
 
-		const response = { success: false, error: new Error() }
 		const environments = [];
 
 		let client = await pool.connect();
-		let result = await client.query(sql);
+		let result = await client.query(sql, [group]);
 		client.release();
 
 		for (let i = 0; i < result.rows.length; i++) {
