@@ -73,6 +73,8 @@ module.exports = function(app) {
 		let result = await client.query(sql, [group]);
 		client.release();
 
+		console.log(group);
+
 		for (let i = 0; i < result.rows.length; i++) {
 			environments.push({
 				id: result.rows[i].id,
@@ -83,7 +85,9 @@ module.exports = function(app) {
 			});
 		}
 
-		var environmentPool = new pg.Pool(db.getEnvironmentPgConfig(environments[0].db_connection));
+		if (environments.length > 0) {
+			const environmentPool = new pg.Pool(db.getEnvironmentPgConfig(environments[0].db_connection));
+		}
 
 		res.send(`<html><body><pre><code>${JSON.stringify(environments, null, 4)}</code></pre></body></html>`);
 	});
