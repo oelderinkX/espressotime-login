@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="manifest" href="/webpage/manifest.json">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="javascript/common.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
+    <script>
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+
+            return color;
+        }
+
+        function setRandomRoleColors() {
+            const rc1 = document.getElementById('rolecolor1');
+            const rtc1 = document.getElementById('roletextcolor1');
+            rc1.value = getRandomColor();
+            rtc1.value = getRandomColor();
+
+            const rc3 = document.getElementById('rolecolor3');
+            const rtc3 = document.getElementById('roletextcolor3');
+            rc3.value = getRandomColor();
+            rtc3.value = getRandomColor();
+
+            const rc4 = document.getElementById('rolecolor4');
+            const rtc4 = document.getElementById('roletextcolor4');
+            rc4.value = getRandomColor();
+            rtc4.value = getRandomColor();
+        }
+    </script>
+    <style>
+        body {
+            background-color: #ac9175;
+            color: #1f1f1f !important;
+            font-family: 'Playfair Display';
+            margin: 15px;
+        }
+
+        a {
+            color: #1f1f1f !important;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+
+        .heading {
+            width: 160px
+        }
+    </style>
+</head>
+<html>
+    <body>
+        <h1>Registration</h1>
+        <br/>
+        <div><form action="/registration" method="post" target="registrationresult">
+            <table style="width:100%">
+                <tr>
+                    <td class="heading">Group:</td><td><input type="text" id="group" value="nz1" readonly disabled></td>
+                </tr>
+                <tr>
+                    <td> </td><td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>Shop name:</td><td><input type="text" size=40 id="shopname"></td>
+                </tr>
+                <tr>
+                    <td>Shop phone: </td><td><input type="tel" size=40 id="shopphone"></td>
+                </tr>
+                <tr>
+                    <td>Shop address: </td><td><textarea rows="5" cols="40" id="shopaddress"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Shop email: </td><td><input type="email" size=40 id="shopemail"></td>
+                </tr>
+                <tr>
+                    <td> </td><td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>Device password: </td><td><input type="text" size=40 id="devicepassword"></td>
+                </tr>
+            </table>
+            <br/>
+            <table style="width:100%">
+                <tr>
+                    <td class="heading">Roles:</td>
+                    <td>
+                        <table style="width:100%">
+                            <tr>
+                                <th>Name</th>
+                                <th>Color</th>
+                                <th>Text Color</th>
+                                <th>Is a Job / Role</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="rolename1" value="Manager" readonly disabled></td>
+                                <td><input type="color" id="rolecolor1"></td>
+                                <td><input type="color" id="roletextcolor1"></td>
+                                <td><input type="checkbox" id="roleisjob1" checked readonly disabled></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="rolename2" value="Timeoff / Unavailable" readonly disabled></td>
+                                <td><input type="color" id="rolecolor2" value="#000000" readonly disabled></td>
+                                <td><input type="color" id="roletextcolor2" value="#FFFFFF" readonly disabled></td>
+                                <td><input type="checkbox" id="roleisjob2" readonly disabled></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="rolename3" value="FOH"></td>
+                                <td><input type="color" id="rolecolor3" value="red"></td>
+                                <td><input type="color" id="roletextcolor3"></td>
+                                <td><input type="checkbox" id="roleisjob3" checked></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="rolename4" value="Kitchen"></td>
+                                <td><input type="color" id="rolecolor4"></td>
+                                <td><input type="color" id="roletextcolor4"></td>
+                                <td><input type="checkbox" id="roleisjob4" checked></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    * You can add more roles at a later date, and also edit them.  Some roles are Mandatory
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </table>
+                <br/>
+                <table style="width:100%">
+                <tr>
+                    <td class="heading">Employees:</td>
+                    <td>
+                        <table style="width:100%">
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Pin</th>
+                                <th>Start Date</th>
+                                <th>Job</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="employeename1" placeholder="Owners/Managers name"></td>
+                                <td><input type="text" id="employeephone1"></td>
+                                <td><input type="text" id="employeeemail1"></td>
+                                <td><input type="text" id="employeepin1"></td>
+                                <td><input type="date" id="employeestartdate1"></td>
+                                <td>
+                                    <select id="employeejob1" disabled>
+                                        <option value="Manager" selected>Manager</option>
+                                        <option value="Manager">FOH</option>
+                                        <option value="Manager">Kitchen</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="employeename2"></td>
+                                <td><input type="text" id="employeephone2"></td>
+                                <td><input type="text" id="employeeemail2"></td>
+                                <td><input type="text" id="employeepin2"></td>
+                                <td><input type="date" id="employeestartdate2"></td>
+                                <td>
+                                    <select id="employeejob2">
+                                        <option value="" select>--- Select Job ---</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="Manager">FOH</option>
+                                        <option value="Manager">Kitchen</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="employeename3"></td>
+                                <td><input type="text" id="employeephone3"></td>
+                                <td><input type="text" id="employeeemail3"></td>
+                                <td><input type="text" id="employeepin3"></td>
+                                <td><input type="date" id="employeestartdate3"></td>
+                                <td>
+                                    <select id="employeejob3">
+                                        <option value="" select>--- Select Job ---</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="Manager">FOH</option>
+                                        <option value="Manager">Kitchen</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    * You can add more employees later, but you need to define at least ONE owner/manager
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <button id="submitButton" type="submit" class="btn btn-success btn-lg" onclick="">Register</button>
+        </form></div>
+        <iframe width="300" height="300" frameBorder="0" src="about:blank" name="registrationresult">
+            <html>
+                <body>
+                    no result
+                </body>
+            </html>
+        </iframe>
+    </body>
+<script>
+    setRandomRoleColors();
+</script>
+</html>
