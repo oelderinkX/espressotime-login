@@ -25,18 +25,18 @@
         }
 
         function setRandomRoleColors() {
-            const rc1 = document.getElementsByName('rolecolor1');
-            const rtc1 = document.getElementsByName('roletextcolor1');
+            const rc1 = document.getElementsByName('rolecolor1')[0];
+            const rtc1 = document.getElementsByName('roletextcolor1')[0];
             rc1.value = getRandomColor();
             rtc1.value = getRandomColor();
 
-            const rc3 = document.getElementsByName('rolecolor3');
-            const rtc3 = document.getElementsByName('roletextcolor3');
+            const rc3 = document.getElementsByName('rolecolor3')[0];
+            const rtc3 = document.getElementsByName('roletextcolor3')[0];
             rc3.value = getRandomColor();
             rtc3.value = getRandomColor();
 
-            const rc4 = document.getElementsByName('rolecolor4');
-            const rtc4 = document.getElementsByName('roletextcolor4');
+            const rc4 = document.getElementsByName('rolecolor4')[0];
+            const rtc4 = document.getElementsByName('roletextcolor4')[0];
             rc4.value = getRandomColor();
             rtc4.value = getRandomColor();
         }
@@ -69,7 +69,7 @@
         <div><form action="/registration" method="post" target="registrationresult">
             <table style="width:100%">
                 <tr>
-                    <td class="heading">Group:</td><td><input type="text" name="group" value="nz1" readonly disabled></td>
+                    <td class="heading">Group:</td><td><input type="text" name="group" value="nz1" readonly></td>
                 </tr>
                 <tr>
                     <td> </td><td>&nbsp;</td>
@@ -106,16 +106,16 @@
                                 <th>Is a Job / Role</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="rolename1" value="Manager" readonly disabled></td>
+                                <td><input type="text" name="rolename1" value="Manager" readonly></td>
                                 <td><input type="color" name="rolecolor1"></td>
                                 <td><input type="color" name="roletextcolor1"></td>
-                                <td><input type="checkbox" name="roleisjob1" checked readonly disabled></td>
+                                <td><input type="checkbox" name="roleisjob1" checked readonly></td>
                             </tr>
                             <tr>
-                                <td><input type="text" name="rolename2" value="Timeoff / Unavailable" readonly disabled></td>
-                                <td><input type="color" name="rolecolor2" value="#000000" readonly disabled></td>
-                                <td><input type="color" name="roletextcolor2" value="#FFFFFF" readonly disabled></td>
-                                <td><input type="checkbox" name="roleisjob2" readonly disabled></td>
+                                <td><input type="text" name="rolename2" value="Timeoff / Unavailable" readonly></td>
+                                <td><input type="color" name="rolecolor2" value="#000000" readonly></td>
+                                <td><input type="color" name="roletextcolor2" value="#FFFFFF" readonly></td>
+                                <td><input type="checkbox" name="roleisjob2" readonly></td>
                             </tr>
                             <tr>
                                 <td><input type="text" name="rolename3" value="FOH"></td>
@@ -159,7 +159,7 @@
                                 <td><input type="text" name="employeepin1"></td>
                                 <td><input type="date" name="employeestartdate1"></td>
                                 <td>
-                                    <select name="employeejob1" disabled>
+                                    <select name="employeejob1" readonly>
                                         <option value="Manager" selected>Manager</option>
                                         <option value="Manager">FOH</option>
                                         <option value="Manager">Kitchen</option>
