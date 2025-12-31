@@ -43,7 +43,7 @@
 
         function addSubmitEventListener() {
             const form = document.getElementById('submitButton');
-            form.addEventListener('submit', function (event) {
+            form.addEventListener('click', function (event) {
                 const group = document.getElementsByName('group')[0];
                 group.disabled = false;
                 event.submit();
