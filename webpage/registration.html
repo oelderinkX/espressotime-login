@@ -43,14 +43,14 @@
 
         function addSubmitEventListener() {
             const form = document.getElementById('registrationForm');
-            form.addEventListener('submit', (event) => {
+            form.addEventListener('submit', async (event) => {
                 event.preventDefault();
-                const formData = new FormData(form);
                 const group = document.getElementsByName('group')[0];
-                
-                group.disabled = false;
 
-                fetch('/registration', {
+                group.disabled = false;
+                const formData = new FormData(form);
+
+                await fetch('/registration', {
                     method: 'POST',
                     body: formData
                 }).then(response => {
