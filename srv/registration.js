@@ -74,6 +74,7 @@ module.exports = function(app) {
 		client.release();
 
 		console.log(group);
+		console.log('Received data:', req.body);
 
 		for (let i = 0; i < result.rows.length; i++) {
 			environments.push({
