@@ -16,7 +16,7 @@ module.exports = function(app) {
 		res.send(registrationPage);
 	});
 
-	app.post('/registration', urlencodedParser, async function(req, res) {
+	app.post('/registration', jsonParser, async function(req, res) {
 		const group = req.body.group;
 		const shopname = req.body.shopname;
 		const shopphone = req.body.shopphone;
