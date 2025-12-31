@@ -40,6 +40,22 @@
             rc4.value = getRandomColor();
             rtc4.value = getRandomColor();
         }
+
+        function addSubmitEventListener() {
+            const form = document.getElementById('submitButton');
+            form.addEventListener('submit', doSubmit);
+        }
+
+        function doSubmit() {
+            const form = document.getElementById('submitButton');
+            const group = document.getElementsByName('group')[0];
+
+            group.disabled = false;
+
+            form.submit();
+
+            group.disabled = true;
+        }
     </script>
     <style>
         body {
@@ -69,7 +85,7 @@
         <div><form action="/registration" method="post" target="registrationresult">
             <table style="width:100%">
                 <tr>
-                    <td class="heading">Group:</td><td><input type="text" name="group" value="nz1" readonly></td>
+                    <td class="heading">Group:</td><td><input type="text" name="group" value="nz1" readonly disabled></td>
                 </tr>
                 <tr>
                     <td> </td><td>&nbsp;</td>
@@ -206,7 +222,7 @@
                 </tr>
             </table>
             <br/>
-            <button id="submitButton" type="submit" class="btn btn-success btn-lg" onclick="">Register</button>
+            <button id="submitButton" type="submit" class="btn btn-success btn-lg">Register</button>
         </form></div>
         <iframe width="300" height="300" frameBorder="0" src="about:blank" name="registrationresult">
             <html>
@@ -218,5 +234,6 @@
     </body>
 <script>
     setRandomRoleColors();
+    addSubmitEventListener();
 </script>
 </html>

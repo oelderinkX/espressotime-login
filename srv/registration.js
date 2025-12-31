@@ -17,15 +17,6 @@ module.exports = function(app) {
 	});
 
 	app.post('/registration', urlencodedParser, async function(req, res) {
-
-		console.log(req.body);
-		console.log('');
-		console.log('');
-		console.log('');
-		console.log(req);
-		console.log('');
-		console.log('');
-
 		const group = req.body.group;
 		const shopname = req.body.shopname;
 		const shopphone = req.body.shopphone;
