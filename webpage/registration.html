@@ -42,11 +42,12 @@
         }
 
         function addSubmitEventListener() {
-            const form = document.getElementById('submitButton');
-            form.addEventListener('click', (event) => {
+            const form = document.getElementById('registrationForm');
+            form.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(form);
                 const group = document.getElementsByName('group')[0];
+                
                 group.disabled = false;
 
                 fetch('/registration', {
@@ -83,7 +84,7 @@
     <body>
         <h1>Registration</h1>
         <br/>
-        <div><form action="/registration" method="post" target="registrationresult">
+        <div><form action="/registration" method="post" target="registrationresult" id="registrationForm">
             <table style="width:100%">
                 <tr>
                     <td class="heading">Group:</td><td><input type="text" name="group" value="nz1" readonly disabled></td>
