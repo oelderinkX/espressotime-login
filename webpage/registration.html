@@ -43,11 +43,18 @@
 
         function addSubmitEventListener() {
             const form = document.getElementById('submitButton');
-            form.addEventListener('click', function (event) {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(form);
                 const group = document.getElementsByName('group')[0];
                 group.disabled = false;
-                event.submit();
-                group.disabled = true;
+
+                fetch('/registration', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    group.disabled = true;
+                });                
             });
         }
     </script>
