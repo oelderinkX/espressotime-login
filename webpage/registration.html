@@ -43,18 +43,12 @@
 
         function addSubmitEventListener() {
             const form = document.getElementById('submitButton');
-            form.addEventListener('submit', doSubmit);
-        }
-
-        function doSubmit() {
-            const form = document.getElementById('submitButton');
-            const group = document.getElementsByName('group')[0];
-
-            group.disabled = false;
-
-            form.submit();
-
-            group.disabled = true;
+            form.addEventListener('submit', function (event) {
+                const group = document.getElementsByName('group')[0];
+                group.disabled = false;
+                event.submit();
+                group.disabled = true;
+            });
         }
     </script>
     <style>
@@ -135,7 +129,7 @@
                             </tr>
                             <tr>
                                 <td><input type="text" name="rolename3" value="FOH"></td>
-                                <td><input type="color" name="rolecolor3" value="red"></td>
+                                <td><input type="color" name="rolecolor3"></td>
                                 <td><input type="color" name="roletextcolor3"></td>
                                 <td><input type="checkbox" name="roleisjob3" checked></td>
                             </tr>
