@@ -15,10 +15,10 @@
     <link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
     <script>
         function login() {
-            const usr2 = document.getElementById("usr2");
-            const empl2 = document.getElementById("empl2");
-            const pwd2 = document.getElementById("pwd2");
-            const json = { shop: usr2.value.trim(), employee: empl2.value.trim(), password: pwd2.value.trim(), loginType: 1 };
+            const shopname = document.getElementById("shopname");
+            const employeename = document.getElementById("employeename");
+            const password = document.getElementById("password");
+            const json = { shop: shopname.value.trim(), employee: employeename.value.trim(), password: password.value.trim(), loginType: 1 };
 
             sendPost("/login", JSON.stringify(json), function(response) {
                 var login = JSON.parse(response);
@@ -79,14 +79,14 @@
     <div class="container"></div>
         <h3>Employee Login</h1>
         <br/>
-        <label for="usr2">Shop Name:</label>
-        <input type="text" class="form-control" id="usr2">
+        <label for="shopname">Shop Name:</label>
+        <input type="text" class="form-control" name="shopname" id="shopname">
         <br/>
-        <label for="empl2">Employee Name:</label>
-        <input type="text" class="form-control" id="empl2">
+        <label for="employeename">Employee Name:</label>
+        <input type="text" class="form-control" name="employeename" id="employeename">
         <br/>
-        <label for="pwd2">Password:</label>
-        <input type="password" class="form-control" id="pwd2">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" id="password">
         <br/>
         <button id="submitButton" type="submit" class="btn btn-success btn-lg" onclick="login();">Login</button>    
     </div>
