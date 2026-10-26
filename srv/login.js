@@ -63,7 +63,7 @@ module.exports = function(app) {
 							}
 
 							let sql = '';
-							const params = [];
+							let params = [];
 							const isEmployeeLogin = employee && employee.length > 0;
 
 							if (loginType == 1) {
