@@ -53,7 +53,7 @@ module.exports = function(app) {
 
 					if (result && result.rowCount == 1) {
 						const environment = result.rows[0].db_connection;
-						const url = result.rows[0].url;
+						let url = result.rows[0].url;
 
 						const environment_pool = new pg.Pool(db.getEnvironmentPgConfig(environment));
 					
