@@ -1,33 +1,42 @@
-var pg = require('pg');
-var bodyParser = require('body-parser');
-var fs = require("fs");
-var db = require('../script/db.js');
-var common = require('../javascript/common.js');
+const pg = require('pg');
+const bodyParser = require('body-parser');
+const fs = require("fs");
+const db = require('../script/db.js');
+const common = require('../javascript/common.js');
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var jsonParser = bodyParser.json();
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const jsonParser = bodyParser.json();
 
-var pool = new pg.Pool(db.localPgConfig());
+const pool = new pg.Pool(db.localPgConfig());
 
-var loginPage = fs.readFileSync(__dirname + "/../webpage/login.html", "utf8");
-var environmentErrorPage = fs.readFileSync(__dirname + "/../webpage/environmenterror.html", "utf8");
+const loginPage = fs.readFileSync(__dirname + "/../webpage/login.html", "utf8");
+const mobileLoginPage = fs.readFileSync(__dirname + "/../webpage/mobile_login.html", "utf8");
+const environmentErrorPage = fs.readFileSync(__dirname + "/../webpage/environmenterror.html", "utf8");
 
 module.exports = function(app) {
 	app.get('/', urlencodedParser, function(req, res) {
-		res.send(loginPage);
+		if (req.useragent.isMobile) {
+        	res.send(mobileLoginPage);
+    	} else {
+			res.send(loginPage);
+		}
 	});
 	
 	app.get('/login', urlencodedParser, function(req, res) {
-		res.send(loginPage);
+		if (req.useragent.isMobile) {
+        	res.send(mobileLoginPage);
+    	} else {
+			res.send(loginPage);
+		}
 	});
 
 	app.post('/login', jsonParser, function(req, res) {
-		var shop = req.body.shop;
-		var employee = req.body.employee;
-		var pass = req.body.password;
-		var loginType = req.body.loginType;
+		const shop = req.body.shop;
+		const employee = req.body.employee;
+		const pass = req.body.password;
+		const loginType = req.body.loginType;
 	
-        var sql = "select id, name, url, db_connection, type from espresso.environment";
+        let sql = "select id, name, url, db_connection, type from espresso.environment";
         sql += " where id in (select current_environment_id";
         sql += " from espresso.login";
         sql += " where active = true and lower(shop_name) = lower($1))";
@@ -43,19 +52,19 @@ module.exports = function(app) {
 					done();
 
 					if (result && result.rowCount == 1) {
-						var environment = result.rows[0].db_connection;
-						var url = result.rows[0].url;
+						const environment = result.rows[0].db_connection;
+						const url = result.rows[0].url;
 
-						var environment_pool = new pg.Pool(db.getEnvironmentPgConfig(environment));
+						const environment_pool = new pg.Pool(db.getEnvironmentPgConfig(environment));
 					
 						environment_pool.connect(function(err, environment_connection, done) {
 							if (err) {
 								console.log(err);
 							}
 
-							var sql = '';
-							var params = [];
-							var isEmployeeLogin = employee && employee.length > 0;
+							let sql = '';
+							const params = [];
+							const isEmployeeLogin = employee && employee.length > 0;
 
 							if (loginType == 1) {
 								sql = "select e.name, e.id, e.job_title, r.name as rolename from espresso.employee as e";
@@ -77,10 +86,10 @@ module.exports = function(app) {
 							environment_connection.query(sql, params, function(err, result) {
 								done();
 
-								var login = { success: false, reason: "unknown error" };
+								let login = { success: false, reason: "unknown error" };
 
 								if (result && result.rowCount == 1) {
-									var encoded_identifier = '';
+									let encoded_identifier = '';
 
 									if (loginType == 1) {
 										encoded_identifier = result.rows[0].name;
@@ -115,7 +124,7 @@ module.exports = function(app) {
 										url += "/device";
 									}
 
-									var encode = Buffer.from(encoded_identifier).toString('base64');
+									const encode = Buffer.from(encoded_identifier).toString('base64');
 									login = { success: true, identifier: encode, redirect: url };
 								} else if (result && result.rowCount > 1 ) {
 									login = { success: false, reason: "multiple users found, call administrator" };

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="manifest" href="/webpage/manifest.json">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="javascript/common.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
+    <script>
+        function login() {
+            const usr2 = document.getElementById("usr2");
+            const empl2 = document.getElementById("empl2");
+            const pwd2 = document.getElementById("pwd2");
+            const json = { shop: usr2.value.trim(), employee: empl2.value.trim(), password: pwd2.value.trim(), loginType: 1 };
+
+            sendPost("/login", JSON.stringify(json), function(response) {
+                var login = JSON.parse(response);
+
+                if (login.success == true) {
+                    var url = new URL(window.location.href);
+
+                    var form = document.createElement('form');
+                    form.action = 'https://' + login.redirect;
+                    form.method ='POST';
+
+                    var inputIdentifier = document.createElement('input');
+                    inputIdentifier.type = 'hidden';
+                    inputIdentifier.name = 'identifier';
+                    inputIdentifier.value = login.identifier;
+                    form.appendChild(inputIdentifier);
+
+                    var inputRedirect = document.createElement('input');
+                    inputRedirect.type = 'hidden';
+                    inputRedirect.name = 'redirect';
+                    inputRedirect.value = url.searchParams.get('redirect');
+                    form.appendChild(inputRedirect);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                } else {
+                    alert('Login failure: ' + login.reason);
+                }
+            });
+        }
+    </script>
+    <style>
+        html {
+            font-size: 100%;
+            font-size: 62.5%;
+        }
+
+        body {
+            background-color: #ac9175;
+            color: #1f1f1f !important;
+            font-family: 'Playfair Display';
+            margin-top: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+
+        a {
+            color: #1f1f1f !important;
+        }
+    </style>
+</head>
+<body>
+    <span style="float: top;">
+        <button type="button" style="margin:15px;color:#ffffff;background-color:#000000" class="btn btn-em" onclick="window.location.href='https://www.managemycafe.com';">Back</button>
+    </span>
+
+    <div class="container"></div>
+        <h3>Employee Login</h1>
+        <br/>
+        <label for="usr2">Shop Name:</label>
+        <input type="text" class="form-control" id="usr2">
+        <br/>
+        <label for="empl2">Employee Name:</label>
+        <input type="text" class="form-control" id="empl2">
+        <br/>
+        <label for="pwd2">Password:</label>
+        <input type="password" class="form-control" id="pwd2">
+        <br/>
+        <button id="submitButton" type="submit" class="btn btn-success btn-lg" onclick="login();">Login</button>    
+    </div>
+</body>
+</html>
